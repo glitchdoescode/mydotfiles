@@ -128,6 +128,14 @@ grep -q "QT_QPA_PLATFORMTHEME=qt5ct" ~/.profile 2>/dev/null || echo "export QT_Q
 grep -q "QT_STYLE_OVERRIDE=Fusion" ~/.profile 2>/dev/null || echo "export QT_STYLE_OVERRIDE=Fusion" >> ~/.profile
 print_success "Environment variables configured"
 
+# Set up automated lock screen recovery
+print_status "Setting up automated lock screen recovery..."
+mkdir -p ~/.config/systemd/user
+cp "$DOTFILES_DIR/config/auto-unlock.service" ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable auto-unlock.service
+print_success "Automated lock recovery configured"
+
 print_success "🎉 Installation complete!"
 echo ""
 print_status "Configuration backup saved to: $BACKUP_DIR"

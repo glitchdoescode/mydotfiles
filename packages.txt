@@ -1,0 +1,85 @@
+# i3 Developer Setup - Complete Package List
+# All packages required for this i3 configuration
+
+## Core i3 Window Manager
+i3-wm
+i3blocks
+i3lock
+rofi
+polybar
+
+## Display Manager & Login
+sddm
+sddm-kcm
+qt5-graphicaleffects
+qt5-quickcontrols2
+qt5-svg
+
+## Compositor & Effects
+picom
+dunst
+xss-lock
+dex
+
+## Applications
+kitty          # Terminal emulator
+zed            # Code editor
+firefox        # Web browser
+thunar         # File manager
+thunar-archive-plugin
+file-roller    # Archive manager
+xarchiver      # Alternative archive manager
+feh            # Image viewer
+mupdf          # PDF viewer
+mpv            # Media player
+flameshot      # Screenshot tool
+
+## Fonts & Typography
+ttf-hack-nerd
+noto-fonts
+noto-fonts-cjk     # Chinese, Japanese, Korean
+noto-fonts-emoji   # Emoji support
+noto-fonts-extra
+ttf-liberation
+ttf-dejavu
+
+## Theming & Icons
+papirus-icon-theme
+materia-gtk-theme
+breeze-gtk
+gtk-engine-murrine
+
+## System Utilities
+brightnessctl      # Brightness control
+pulseaudio
+pulseaudio-alsa
+pavucontrol       # Audio control GUI
+networkmanager
+network-manager-applet
+xdg-utils
+xorg-xrandr       # Display configuration
+xorg-xsetroot
+qt5ct             # Qt5 theme configuration
+kvantum           # Qt theme engine
+
+## Development Tools
+git
+base-devel
+vim
+neovim
+
+## Optional Dependencies
+# For better archive support
+arj
+unrar
+p7zip
+zip
+unzip
+gzip
+bzip2
+xz
+lrzip
+
+# For additional multimedia support
+ffmpeg
+gstreamer

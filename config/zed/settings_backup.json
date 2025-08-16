@@ -1,0 +1,298 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  // AI Assistant Configuration
+  "agent": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4"
+    }
+  },
+
+  // UI and Theme Settings
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Dark",
+    "dark": "Rosé Pine"
+  },
+
+  // Editor Behavior
+  "autosave": "on_focus_change",
+  "format_on_save": "on",
+  "show_whitespaces": "selection",
+  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": true,
+  "preferred_line_length": 100,
+  "soft_wrap": "preferred_line_length",
+  "tab_size": 4,
+  "hard_tabs": false,
+  "show_inline_completions": true,
+  "show_completion_documentation": true,
+  "completion_documentation_secondary_query_debounce": 300,
+
+  // File and Project Settings
+  "project_panel": {
+    "button": true,
+    "default_width": 240,
+    "dock": "left",
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true,
+    "indent_size": 20,
+    "auto_reveal_entries": true
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+
+  // Git Integration
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": {
+      "enabled": true
+    }
+  },
+
+  // Terminal Configuration
+  "terminal": {
+    "alternate_scroll": "off",
+    "blinking": "terminal_controlled",
+    "copy_on_select": false,
+    "dock": "bottom",
+    "default_width": 640,
+    "default_height": 320,
+    "font_family": "JetBrains Mono",
+    "font_features": null,
+    "font_size": 15,
+    "line_height": "comfortable",
+    "option_as_meta": false,
+    "button": false,
+    "shell": "system",
+    "toolbar": {
+      "title": true
+    },
+    "working_directory": "current_project_directory"
+  },
+
+  // Language-specific configurations
+  "languages": {
+    "Python": {
+      "language_servers": ["pyright", "ruff"],
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "code_actions": {
+            "source.organizeImports.ruff": true,
+            "source.fixAll.ruff": true
+          }
+        },
+        {
+          "language_server": {
+            "name": "ruff"
+          }
+        }
+      ],
+      "tab_size": 4,
+      "preferred_line_length": 88
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+        "source.fixAll.eslint": true
+      },
+      "formatter": "prettier",
+      "tab_size": 2
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+        "source.fixAll.eslint": true
+      },
+      "formatter": "prettier",
+      "tab_size": 2
+    },
+    "JSON": {
+      "formatter": "prettier",
+      "tab_size": 2
+    },
+    "HTML": {
+      "formatter": "prettier",
+      "tab_size": 2
+    },
+    "CSS": {
+      "formatter": "prettier",
+      "tab_size": 2
+    },
+    "Markdown": {
+      "formatter": "prettier",
+      "tab_size": 2,
+      "soft_wrap": "preferred_line_length"
+    },
+    "YAML": {
+      "tab_size": 2
+    },
+    "TOML": {
+      "formatter": "taplo"
+    },
+    "Rust": {
+      "format_on_save": "on",
+      "formatter": "rustfmt"
+    },
+    "Go": {
+      "format_on_save": "on",
+      "formatter": "gofmt",
+      "code_actions_on_format": {
+        "source.organizeImports": true
+      }
+    }
+  },
+
+  // Language Server Protocol (LSP) configurations
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python": {
+          "analysis": {
+            "typeCheckingMode": "basic",
+            "autoImportCompletions": true,
+            "autoSearchPaths": true,
+            "diagnosticMode": "openFilesOnly",
+            "useLibraryCodeForTypes": true
+          }
+        }
+      }
+    },
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          "lineLength": 88,
+          "lint": {
+            "select": ["E", "F", "W", "I", "N", "UP", "ANN", "S", "B", "A", "C4", "DTZ", "T10", "EM", "EXE", "ISC", "ICN", "G", "INP", "PIE", "T20", "PT", "Q", "RSE", "RET", "SLF", "SIM", "TID", "ARG", "ERA", "PD", "PGH", "PL", "TRY", "NPY", "RUF"],
+            "ignore": ["E501", "ANN101", "ANN102"]
+          },
+          "format": {
+            "quote-style": "double",
+            "indent-style": "space",
+            "skip-source-first-line": false,
+            "line-ending": "auto"
+          }
+        }
+      }
+    },
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          "includeInlayParameterNameHints": "all",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": true,
+          "includeInlayFunctionParameterTypeHints": true,
+          "includeInlayVariableTypeHints": true,
+          "includeInlayPropertyDeclarationTypeHints": true,
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          "includeInlayEnumMemberValueHints": true
+        }
+      }
+    }
+  },
+
+  // Inlay hints for better code understanding
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "edit_debounce_ms": 700,
+    "scroll_debounce_ms": 50
+  },
+
+  // Code actions and diagnostics
+  "code_actions_on_format": {
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+
+  // Search and navigation
+  "search": {
+    "whole_word": false,
+    "case_sensitive": false,
+    "include_ignored": false,
+    "regex": false
+  },
+
+  // File associations and exclusions
+  "file_types": {
+    "Dockerfile": ["Dockerfile*"],
+    "JSON": ["*.json", "*.jsonc", ".eslintrc", ".babelrc", ".prettierrc"],
+    "YAML": ["*.yml", "*.yaml", "docker-compose*.yml", "docker-compose*.yaml"],
+    "requirements.txt": ["requirements*.txt", "requirements*.in"]
+  },
+
+  // Files to exclude from search and project panel
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/.vscode",
+    "**/__pycache__",
+    "**/.pytest_cache",
+    "**/*.pyc",
+    "**/*.pyo",
+    "**/*.egg-info",
+    "**/node_modules",
+    "**/dist",
+    "**/build",
+    "**/.next",
+    "**/target",
+    "**/Cargo.lock"
+  ],
+
+  // Collaboration and productivity features
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "notification_panel": {
+    "dock": "right"
+  },
+  "chat_panel": {
+    "dock": "right"
+  },
+
+  // Performance and system integration
+  "cursor_blink": false,
+  "hover_popover_enabled": true,
+  "scrollbar": {
+    "show": "auto",
+    "cursors": true,
+    "git_diff": true,
+    "search_results": true,
+    "selected_symbol": true,
+    "diagnostics": true
+  },
+
+  // Auto-install useful extensions
+  "auto_install_extensions": {
+    "html": true,
+    "make": true,
+    "dockerfile": true,
+    "toml": true,
+    "xml": true,
+    "sql": true,
+    "log": true,
+    "env": true,
+    "ini": true,
+    "gitignore": true,
+    "ruff": true
+  }
+}

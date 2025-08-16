@@ -1,0 +1,23 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Log files
+*.log
+
+# Personal files (add your personal files here)
+# config/git/
+# config/ssh/
+
+# Cache files
+cache/
+.cache/
+
+# Temporary files
+tmp/
+temp/

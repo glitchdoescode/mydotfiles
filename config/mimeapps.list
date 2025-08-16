@@ -1,0 +1,151 @@
+[Default Applications]
+# Terminal
+x-scheme-handler/terminal=kitty.desktop
+
+# Image viewer - feh as default (comprehensive image formats)
+image/jpeg=feh.desktop
+image/jpg=feh.desktop
+image/png=feh.desktop
+image/gif=feh.desktop
+image/webp=feh.desktop
+image/bmp=feh.desktop
+image/tiff=feh.desktop
+image/svg+xml=feh.desktop
+image/x-bmp=feh.desktop
+image/x-png=feh.desktop
+image/x-tga=feh.desktop
+image/x-pixmap=feh.desktop
+image/x-xpixmap=feh.desktop
+image/x-xbitmap=feh.desktop
+image/x-portable-anymap=feh.desktop
+image/x-portable-bitmap=feh.desktop
+image/x-portable-graymap=feh.desktop
+image/x-portable-pixmap=feh.desktop
+image/avif=feh.desktop
+image/heic=feh.desktop
+image/heif=feh.desktop
+
+# PDF viewer - comprehensive PDF types
+application/pdf=mupdf.desktop
+application/x-pdf=mupdf.desktop
+application/x-bzpdf=mupdf.desktop
+application/x-gzpdf=mupdf.desktop
+application/postscript=mupdf.desktop
+application/x-bzpostscript=mupdf.desktop
+application/x-gzpostscript=mupdf.desktop
+image/x-eps=mupdf.desktop
+application/illustrator=mupdf.desktop
+
+# Text editor - Zed
+text/plain=zed.desktop
+text/x-c=zed.desktop
+text/x-cpp=zed.desktop
+text/x-python=zed.desktop
+text/x-javascript=zed.desktop
+text/html=google-chrome.desktop
+text/css=zed.desktop
+text/x-markdown=zed.desktop
+text/csv=zed.desktop
+application/json=zed.desktop
+application/xml=zed.desktop
+text/x-java=zed.desktop
+text/x-go=zed.desktop
+text/x-rust=zed.desktop
+text/x-php=zed.desktop
+text/x-ruby=zed.desktop
+text/x-shellscript=zed.desktop
+text/x-yaml=zed.desktop
+
+# File manager
+inode/directory=thunar.desktop
+
+# Web browser
+application/xhtml+xml=google-chrome.desktop
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
+
+# Video formats - mpv
+video/x-matroska=mpv.desktop
+video/mp4=mpv.desktop
+video/x-msvideo=mpv.desktop
+video/quicktime=mpv.desktop
+video/x-ms-wmv=mpv.desktop
+video/x-flv=mpv.desktop
+video/webm=mpv.desktop
+video/ogg=mpv.desktop
+video/3gpp=mpv.desktop
+video/x-fli=mpv.desktop
+
+# Audio formats - mpv
+audio/mpeg=mpv.desktop
+audio/x-wav=mpv.desktop
+audio/ogg=mpv.desktop
+audio/flac=mpv.desktop
+audio/aac=mpv.desktop
+audio/x-m4a=mpv.desktop
+
+# Archive manager
+application/zip=file-roller.desktop
+application/x-tar=file-roller.desktop
+application/x-compressed-tar=file-roller.desktop
+application/x-bzip-compressed-tar=file-roller.desktop
+application/x-xz-compressed-tar=file-roller.desktop
+application/gzip=file-roller.desktop
+application/x-bzip=file-roller.desktop
+application/x-xz=file-roller.desktop
+application/x-7z-compressed=file-roller.desktop
+application/x-rar=file-roller.desktop
+
+# Telegram
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
+x-scheme-handler/postman=Postman.desktop
+
+[Added Associations]
+# Images
+image/jpeg=feh.desktop;
+image/jpg=feh.desktop;
+image/png=feh.desktop;
+image/gif=feh.desktop;
+image/webp=feh.desktop;
+image/bmp=feh.desktop;
+image/tiff=feh.desktop;
+image/svg+xml=feh.desktop;
+image/x-bmp=feh.desktop;
+image/x-png=feh.desktop;
+image/avif=feh.desktop;
+image/heic=feh.desktop;
+image/heif=feh.desktop;
+
+# PDFs
+application/pdf=mupdf.desktop;
+application/x-pdf=mupdf.desktop;
+application/postscript=mupdf.desktop;
+
+# Text files
+text/plain=zed.desktop;
+text/csv=zed.desktop;
+text/x-python=zed.desktop;
+text/x-javascript=zed.desktop;
+application/json=zed.desktop;
+
+# Directories
+inode/directory=thunar.desktop;
+
+# Videos
+video/x-matroska=mpv.desktop;
+video/mp4=mpv.desktop;
+video/webm=mpv.desktop;
+
+# Audio
+audio/mpeg=mpv.desktop;
+audio/flac=mpv.desktop;
+
+
+[Removed Associations]
+image/jpeg=org.kde.gwenview.desktop;gimp.desktop;
+image/png=org.kde.gwenview.desktop;gimp.desktop;
+application/pdf=org.kde.okular.desktop;firefox.desktop;google-chrome.desktop;

@@ -82,6 +82,9 @@ sudo pacman -S --noconfirm \
     file-roller \
     xarchiver \
     feh \
+    libwebp \
+    libavif \
+    libheif \
     mupdf \
     mpv \
     flameshot

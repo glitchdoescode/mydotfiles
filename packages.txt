@@ -30,6 +30,9 @@ thunar-archive-plugin
 file-roller    # Archive manager
 xarchiver      # Alternative archive manager
 feh            # Image viewer
+libwebp        # feh/imlib2 loader: WEBP
+libavif        # feh/imlib2 loader: AVIF (common on modern sites)
+libheif        # feh/imlib2 loader: HEIC/HEIF
 mupdf          # PDF viewer
 mpv            # Media player
 flameshot      # Screenshot tool

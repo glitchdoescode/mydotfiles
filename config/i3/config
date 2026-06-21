@@ -191,6 +191,9 @@ bindsym $mod+Shift+b exec --no-startup-id ~/.config/i3/scripts/wallpaper.sh prev
 # Screenshot
 bindsym Print exec --no-startup-id flameshot gui
 bindsym $mod+Print exec --no-startup-id flameshot screen
+# F6 has a print icon — Super+F6 for region capture, Super+Shift+F6 for full screen
+bindsym $mod+F6 exec --no-startup-id flameshot gui
+bindsym $mod+Shift+F6 exec --no-startup-id flameshot full -c
 
 # Quick terminal scratchpad
 bindsym $mod+grave exec --no-startup-id kitty --class="scratchpad"

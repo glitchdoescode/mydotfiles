@@ -78,6 +78,7 @@ backup_and_copy "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim" "Neovim"
 cp "$DOTFILES_DIR/config/mimeapps.list" "$HOME/.config/"
 cp "$DOTFILES_DIR/config/gtkrc-2.0" "$HOME/.gtkrc-2.0" 2>/dev/null || true
 cp "$DOTFILES_DIR/config/Xresources" "$HOME/.Xresources" 2>/dev/null || true
+cp "$DOTFILES_DIR/config/wallpaper.jpg" "$HOME/.config/wallpaper.jpg" 2>/dev/null || true
 
 # zsh config (interactive + login env). Back up any existing ones first.
 for z in zshrc zprofile; do

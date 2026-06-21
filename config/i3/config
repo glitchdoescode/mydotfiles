@@ -16,7 +16,7 @@ exec --no-startup-id sh -c "killall polybar; sleep 1; polybar poly"
 # exec --no-startup-id /usr/local/bin/xwinwrap -ov -g 2560x1600+0+0 -- mpv --vo=gpu --profile=low-latency --hwdec=auto --no-osc -wid WID --loop --no-audio $HOME/Media/Videos/osaka-midnight-run-porsche-911.3840x2160.mp4
 exec --no-startup-id nm-applet
 exec --no-startup-id flameshot
-exec --no-startup-id feh --bg-fill ~/.config/wallpaper.jpg 2>/dev/null || true
+exec --no-startup-id ~/.config/i3/scripts/wallpaper.sh
 
 
 
@@ -183,6 +183,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+c exec zeditor
 bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+w exec firefox
+
+# Wallpaper cycling (images from ~/Pictures/wallpaper)
+bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/wallpaper.sh next
+bindsym $mod+Shift+b exec --no-startup-id ~/.config/i3/scripts/wallpaper.sh prev
 
 # Screenshot
 bindsym Print exec --no-startup-id flameshot gui

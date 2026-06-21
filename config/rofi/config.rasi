@@ -4,7 +4,7 @@ configuration {
     display-window: "Windows:";
     show-icons: true;
     icon-theme: "Papirus";
-    font: "Hack Nerd Font 14";
+    font: "Hack Nerd Font 18";
     modi: "window,run,drun";
     dpi: 96;
 }
@@ -74,7 +74,7 @@ element {
 }
 
 element-icon {
-    size: 30px;
+    size: 36px;
 }
 
 element selected {

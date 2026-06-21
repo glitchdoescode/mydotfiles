@@ -188,12 +188,8 @@ bindsym $mod+Shift+w exec firefox
 bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/wallpaper.sh next
 bindsym $mod+Shift+b exec --no-startup-id ~/.config/i3/scripts/wallpaper.sh prev
 
-# Screenshot
-# Region capture: PrtSc and the Fn+F6 snip key (which emits Super+Shift+S)
-bindsym Print exec --no-startup-id flameshot gui
+# Screenshot — Fn+F6 snip key (emits Super+Shift+S) → region capture
 bindsym $mod+Shift+s exec --no-startup-id flameshot gui
-# Full screen to clipboard
-bindsym $mod+Print exec --no-startup-id flameshot full -c
 
 # Quick terminal scratchpad
 bindsym $mod+grave exec --no-startup-id kitty --class="scratchpad"

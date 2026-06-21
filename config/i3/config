@@ -4,6 +4,11 @@
 # Startup Applications
 # Load HiDPI / Xft settings (must run before apps so they pick up the DPI)
 exec_always --no-startup-id xrdb -merge ~/.Xresources
+# xdg-desktop-portal — required for browser Save/Download file dialogs (else they
+# hang black). i3 isn't a systemd graphical session, so export the desktop name,
+# push it into the dbus/systemd activation env, and launch the gtk backend +
+# portal frontend directly (they inherit i3's working X authority).
+exec --no-startup-id sh -c 'export XDG_CURRENT_DESKTOP=i3; dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP; /usr/lib/xdg-desktop-portal-gtk & sleep 2; exec /usr/lib/xdg-desktop-portal'
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id dunst
 exec --no-startup-id sh -c "killall polybar; sleep 1; polybar poly"
@@ -25,6 +30,11 @@ font pango:Hack Nerd Font 14
 default_border pixel 2
 default_floating_border pixel 2
 hide_edge_borders smart
+
+# Keep GTK/portal file-chooser dialogs floating, sized sanely and on-screen
+# (GTK renders them oversized on this HiDPI panel, otherwise they land off-screen)
+for_window [class="Xdg-desktop-portal-gtk"] floating enable, resize set 1500 950, move position center
+for_window [window_role="GtkFileChooserDialog"] floating enable, resize set 1500 950, move position center
 
 # Gaps Configuration (i3-gaps for modern appearance)
 gaps inner 8

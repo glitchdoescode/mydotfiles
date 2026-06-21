@@ -68,6 +68,7 @@ backup_and_copy "$DOTFILES_DIR/config/picom" "$HOME/.config/picom" "picom"
 backup_and_copy "$DOTFILES_DIR/config/rofi" "$HOME/.config/rofi" "rofi"
 backup_and_copy "$DOTFILES_DIR/config/dunst" "$HOME/.config/dunst" "dunst"
 backup_and_copy "$DOTFILES_DIR/config/flameshot" "$HOME/.config/flameshot" "flameshot"
+backup_and_copy "$DOTFILES_DIR/config/xdg-desktop-portal" "$HOME/.config/xdg-desktop-portal" "xdg-desktop-portal"
 backup_and_copy "$DOTFILES_DIR/config/fontconfig" "$HOME/.config/fontconfig" "fontconfig"
 backup_and_copy "$DOTFILES_DIR/config/gtk-3.0" "$HOME/.config/gtk-3.0" "GTK3"
 backup_and_copy "$DOTFILES_DIR/config/qt5ct" "$HOME/.config/qt5ct" "Qt5ct"
@@ -152,6 +153,7 @@ grep -q "QT_QPA_PLATFORMTHEME=qt5ct" ~/.profile 2>/dev/null || echo "export QT_Q
 grep -q "QT_STYLE_OVERRIDE=Fusion" ~/.profile 2>/dev/null || echo "export QT_STYLE_OVERRIDE=Fusion" >> ~/.profile
 grep -q "QT_AUTO_SCREEN_SCALE_FACTOR=1" ~/.profile 2>/dev/null || echo "export QT_AUTO_SCREEN_SCALE_FACTOR=1" >> ~/.profile
 grep -q "XCURSOR_SIZE=48" ~/.profile 2>/dev/null || echo "export XCURSOR_SIZE=48" >> ~/.profile
+grep -q "XDG_CURRENT_DESKTOP=i3" ~/.profile 2>/dev/null || echo "export XDG_CURRENT_DESKTOP=i3" >> ~/.profile
 print_success "Environment variables configured"
 
 # Set up automated lock screen recovery

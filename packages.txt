@@ -63,6 +63,9 @@ pavucontrol       # Audio control GUI
 networkmanager
 network-manager-applet
 xdg-utils
+xdg-desktop-portal       # Portal (browser file dialogs, screenshare)
+xdg-desktop-portal-gtk   # GTK backend for the portal
+gvfs                     # Virtual FS for GTK file chooser (places/recent/mounts)
 xorg-xrandr       # Display configuration
 xorg-xsetroot
 qt5ct             # Qt5 theme configuration

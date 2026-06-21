@@ -114,6 +114,9 @@ sudo pacman -S --noconfirm \
     networkmanager \
     network-manager-applet \
     xdg-utils \
+    xdg-desktop-portal \
+    xdg-desktop-portal-gtk \
+    gvfs \
     xorg-xrandr \
     xorg-xsetroot \
     qt5ct \

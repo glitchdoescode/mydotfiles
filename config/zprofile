@@ -1,0 +1,2 @@
+# ~/.zprofile — login shell: pull in env vars from ~/.profile (PATH, HiDPI, GTK/Qt)
+[[ -f ~/.profile ]] && emulate sh -c 'source ~/.profile'

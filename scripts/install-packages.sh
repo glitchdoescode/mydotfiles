@@ -126,6 +126,25 @@ sudo pacman -S --noconfirm \
     fzf
 
 # ---------------------------------------------------------------------------
+# Shell: zsh + plugins + Starship prompt, and make it the default shell
+# ---------------------------------------------------------------------------
+print_status "Installing zsh shell stack..."
+sudo pacman -S --needed --noconfirm \
+    zsh \
+    zsh-completions \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    starship
+
+if [ "$(getent passwd "$USER" | cut -d: -f7)" != "$(command -v zsh)" ]; then
+    print_status "Setting zsh as the default login shell..."
+    sudo chsh -s "$(command -v zsh)" "$USER" && \
+        print_success "Default shell changed to zsh (effective on next login)"
+else
+    print_status "zsh is already the default shell"
+fi
+
+# ---------------------------------------------------------------------------
 # AMD GPU / graphics stack (this machine: Ryzen AI Max "Strix Halo", Radeon 8060S)
 # The amdgpu kernel driver + mesa + RADV (vulkan-radeon) are all that's needed.
 # ---------------------------------------------------------------------------

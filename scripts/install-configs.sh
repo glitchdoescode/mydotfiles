@@ -79,6 +79,16 @@ cp "$DOTFILES_DIR/config/mimeapps.list" "$HOME/.config/"
 cp "$DOTFILES_DIR/config/gtkrc-2.0" "$HOME/.gtkrc-2.0" 2>/dev/null || true
 cp "$DOTFILES_DIR/config/Xresources" "$HOME/.Xresources" 2>/dev/null || true
 
+# zsh config (interactive + login env). Back up any existing ones first.
+for z in zshrc zprofile; do
+    [ -e "$HOME/.$z" ] && cp "$HOME/.$z" "$BACKUP_DIR/" 2>/dev/null
+    cp "$DOTFILES_DIR/config/$z" "$HOME/.$z" 2>/dev/null || true
+done
+# One-time: seed zsh history from bash history so suggestions/Ctrl-R work immediately
+if [ -f "$HOME/.bash_history" ] && [ ! -s "$HOME/.zsh_history" ]; then
+    awk '!seen[$0]++' "$HOME/.bash_history" > "$HOME/.zsh_history"
+fi
+
 print_success "User configurations installed"
 
 # Install system configurations (requires sudo)

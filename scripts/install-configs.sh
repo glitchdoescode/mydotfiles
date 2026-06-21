@@ -67,6 +67,7 @@ backup_and_copy "$DOTFILES_DIR/config/polybar" "$HOME/.config/polybar" "polybar"
 backup_and_copy "$DOTFILES_DIR/config/picom" "$HOME/.config/picom" "picom"
 backup_and_copy "$DOTFILES_DIR/config/rofi" "$HOME/.config/rofi" "rofi"
 backup_and_copy "$DOTFILES_DIR/config/dunst" "$HOME/.config/dunst" "dunst"
+backup_and_copy "$DOTFILES_DIR/config/flameshot" "$HOME/.config/flameshot" "flameshot"
 backup_and_copy "$DOTFILES_DIR/config/fontconfig" "$HOME/.config/fontconfig" "fontconfig"
 backup_and_copy "$DOTFILES_DIR/config/gtk-3.0" "$HOME/.config/gtk-3.0" "GTK3"
 backup_and_copy "$DOTFILES_DIR/config/qt5ct" "$HOME/.config/qt5ct" "Qt5ct"
@@ -76,6 +77,7 @@ backup_and_copy "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim" "Neovim"
 # Copy single files
 cp "$DOTFILES_DIR/config/mimeapps.list" "$HOME/.config/"
 cp "$DOTFILES_DIR/config/gtkrc-2.0" "$HOME/.gtkrc-2.0" 2>/dev/null || true
+cp "$DOTFILES_DIR/config/Xresources" "$HOME/.Xresources" 2>/dev/null || true
 
 print_success "User configurations installed"
 
@@ -93,6 +95,17 @@ print_status "Installing SDDM configuration..."
 sudo mkdir -p /etc/sddm.conf.d/
 sudo cp "$DOTFILES_DIR/config/sddm/theme.conf" /etc/sddm.conf.d/
 print_success "SDDM configuration installed"
+
+# Disable any conflicting display manager (this setup uses SDDM)
+if systemctl is-enabled lightdm.service &> /dev/null; then
+    print_warning "Disabling conflicting display manager: lightdm"
+    sudo systemctl disable lightdm.service
+fi
+if pacman -Qq lightdm &> /dev/null; then
+    print_warning "Removing lightdm package"
+    sudo pacman -Rns --noconfirm lightdm || \
+        print_warning "Could not auto-remove lightdm (check dependencies manually)"
+fi
 
 # Enable SDDM
 print_status "Enabling SDDM service..."
@@ -126,6 +139,8 @@ print_status "Setting up environment variables..."
 grep -q "GTK_THEME=Materia-dark" ~/.profile 2>/dev/null || echo "export GTK_THEME=Materia-dark" >> ~/.profile
 grep -q "QT_QPA_PLATFORMTHEME=qt5ct" ~/.profile 2>/dev/null || echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> ~/.profile
 grep -q "QT_STYLE_OVERRIDE=Fusion" ~/.profile 2>/dev/null || echo "export QT_STYLE_OVERRIDE=Fusion" >> ~/.profile
+grep -q "QT_AUTO_SCREEN_SCALE_FACTOR=1" ~/.profile 2>/dev/null || echo "export QT_AUTO_SCREEN_SCALE_FACTOR=1" >> ~/.profile
+grep -q "XCURSOR_SIZE=32" ~/.profile 2>/dev/null || echo "export XCURSOR_SIZE=32" >> ~/.profile
 print_success "Environment variables configured"
 
 # Set up automated lock screen recovery

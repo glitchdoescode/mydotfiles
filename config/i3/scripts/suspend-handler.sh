@@ -26,7 +26,7 @@ post_resume() {
     fi
     
     # Restart any crashed services
-    systemctl --user restart pulseaudio 2>/dev/null || true
+    systemctl --user restart pipewire pipewire-pulse wireplumber 2>/dev/null || true
     
     # Refresh network
     nmcli networking off && nmcli networking on 2>/dev/null || true

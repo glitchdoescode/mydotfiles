@@ -2,11 +2,13 @@
 # Optimized for fast, minimal, and sleek developer workflow
 
 # Startup Applications
+# Load HiDPI / Xft settings (must run before apps so they pick up the DPI)
+exec_always --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id dunst
 exec --no-startup-id sh -c "killall polybar; sleep 1; polybar poly"
-# Video wallpaper - direct command for faster startup
-exec --no-startup-id /usr/local/bin/xwinwrap -ov -g 1920x1080+0+0 -- mpv --vo=gpu --profile=low-latency --hwdec=auto --no-osc -wid WID --loop --no-audio $HOME/Media/Videos/osaka-midnight-run-porsche-911.3840x2160.mp4
+# Video wallpaper (disabled: xwinwrap + the video are not present on this machine)
+# exec --no-startup-id /usr/local/bin/xwinwrap -ov -g 2560x1600+0+0 -- mpv --vo=gpu --profile=low-latency --hwdec=auto --no-osc -wid WID --loop --no-audio $HOME/Media/Videos/osaka-midnight-run-porsche-911.3840x2160.mp4
 exec --no-startup-id nm-applet
 exec --no-startup-id flameshot
 exec --no-startup-id feh --bg-scale ~/.config/wallpaper.jpg 2>/dev/null || true
@@ -44,7 +46,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Use pactl to adjust volume in PulseAudio.
+# Use pactl to adjust volume (PipeWire via pipewire-pulse).
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status

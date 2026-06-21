@@ -1,35 +1,35 @@
 #!/bin/bash
 
-acpi_out=$(acpi -b)
+# Battery status for polybar — reads sysfs directly (no acpi dependency)
 
-if [[ -z "$acpi_out" ]]; then
+BAT=$(ls -d /sys/class/power_supply/BAT* 2>/dev/null | head -1)
+
+if [[ -z "$BAT" ]]; then
+    echo "No battery"
+    exit 0
+fi
+
+percent=$(cat "$BAT/capacity" 2>/dev/null)
+status=$(cat "$BAT/status" 2>/dev/null)
+
+if [[ -z "$percent" ]]; then
     echo "Battery: N/A"
     exit 1
 fi
 
-status=$(echo "$acpi_out" | cut -d: -f2 | cut -d, -f1 | xargs)
-percent=$(echo "$acpi_out" | grep -o '[0-9]\+%' | tr -d '%')
-time_remaining=$(echo "$acpi_out" | awk -F', ' '{print $3}')
-
-# Choose icon based on percentage
-if [[ $status == "Charging" ]]; then
-    icon=""
+# Nerd Font / Font Awesome battery icons (\u escapes render at runtime)
+if [[ "$status" == "Charging" || "$status" == "Full" ]]; then
+    icon=$''   # plug
 elif (( percent >= 90 )); then
-    icon=""
+    icon=$''   # battery-full
 elif (( percent >= 60 )); then
-    icon=""
+    icon=$''   # three-quarters
 elif (( percent >= 40 )); then
-    icon=""
+    icon=$''   # half
 elif (( percent >= 20 )); then
-    icon=""
+    icon=$''   # quarter
 else
-    icon=""
+    icon=$''   # empty
 fi
 
-# Format output
-if [[ -z "$time_remaining" ]]; then
-    echo "$icon $percent% ($status)"
-else
-    echo "$icon $percent% ($status, $time_remaining)"
-fi
-
+echo "$icon $percent% ($status)"

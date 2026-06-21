@@ -1,0 +1,10 @@
+! HiDPI scaling for 2560x1600 panel (1.5x)
+Xft.dpi:        144
+Xcursor.size:   32
+
+! Font rendering
+Xft.antialias:  true
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.rgba:       rgb
+Xft.lcdfilter:  lcddefault

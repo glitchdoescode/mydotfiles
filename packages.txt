@@ -36,6 +36,7 @@ flameshot      # Screenshot tool
 
 ## Fonts & Typography
 ttf-hack-nerd
+ttf-firacode-nerd  # Kitty terminal font (with ligatures)
 noto-fonts
 noto-fonts-cjk     # Chinese, Japanese, Korean
 noto-fonts-emoji   # Emoji support
@@ -51,8 +52,10 @@ gtk-engine-murrine
 
 ## System Utilities
 brightnessctl      # Brightness control
-pulseaudio
-pulseaudio-alsa
+pipewire           # Audio/video server (replaces PulseAudio)
+pipewire-pulse     # PulseAudio compatibility layer (pactl, pavucontrol)
+pipewire-alsa      # ALSA compatibility
+wireplumber        # PipeWire session manager
 pavucontrol       # Audio control GUI
 networkmanager
 network-manager-applet
@@ -61,12 +64,29 @@ xorg-xrandr       # Display configuration
 xorg-xsetroot
 qt5ct             # Qt5 theme configuration
 kvantum           # Qt theme engine
+xclip             # Clipboard CLI (needed for flameshot image copy on X11)
+
+## AMD GPU / Vulkan (Ryzen AI Max "Strix Halo", Radeon 8060S)
+mesa
+vulkan-radeon         # RADV open-source Vulkan driver for AMD
+vulkan-icd-loader
+vulkan-tools          # vulkaninfo / vkcube
+
+## Gaming (requires [multilib] enabled in /etc/pacman.conf)
+lib32-mesa
+lib32-vulkan-radeon
+steam
+
+## Local AI / LLM (Vulkan path on the iGPU)
+ollama-vulkan         # needs OLLAMA_IGPU_ENABLE=1 for Strix Halo (set via systemd drop-in)
+llama-cpp-vulkan
 
 ## Development Tools
 git
 base-devel
 vim
 neovim
+fzf            # Fuzzy finder (Ctrl-R history, Ctrl-T files, **<Tab>)
 
 ## Optional Dependencies
 # For better archive support

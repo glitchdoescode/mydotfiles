@@ -40,6 +40,18 @@ fi
 print_status "Updating package database..."
 sudo pacman -Sy
 
+# Remove conflicting audio packages (this setup uses PipeWire)
+# Note: lightdm is removed later by install-configs.sh, once SDDM is in place,
+# to avoid leaving the system with no display manager.
+print_status "Checking for conflicting packages..."
+for pkg in pulseaudio pulseaudio-alsa; do
+    if pacman -Qq "$pkg" &> /dev/null; then
+        print_warning "Removing conflicting package: $pkg"
+        sudo pacman -Rns --noconfirm "$pkg" || \
+            print_warning "Could not auto-remove $pkg (check dependencies manually)"
+    fi
+done
+
 print_status "Installing core i3 packages..."
 sudo pacman -S --noconfirm \
     i3-wm \
@@ -77,6 +89,7 @@ sudo pacman -S --noconfirm \
 print_status "Installing fonts and theming..."
 sudo pacman -S --noconfirm \
     ttf-hack-nerd \
+    ttf-firacode-nerd \
     noto-fonts \
     noto-fonts-cjk \
     noto-fonts-emoji \
@@ -85,14 +98,15 @@ sudo pacman -S --noconfirm \
     ttf-dejavu \
     papirus-icon-theme \
     materia-gtk-theme \
-    breeze-gtk \
-    gtk-engine-murrine
+    breeze-gtk
 
 print_status "Installing system utilities..."
 sudo pacman -S --noconfirm \
     brightnessctl \
-    pulseaudio \
-    pulseaudio-alsa \
+    pipewire \
+    pipewire-pulse \
+    pipewire-alsa \
+    wireplumber \
     pavucontrol \
     networkmanager \
     network-manager-applet \
@@ -100,14 +114,68 @@ sudo pacman -S --noconfirm \
     xorg-xrandr \
     xorg-xsetroot \
     qt5ct \
-    kvantum
+    kvantum \
+    xclip
 
 print_status "Installing development tools..."
 sudo pacman -S --noconfirm \
     git \
     base-devel \
     vim \
-    neovim
+    neovim \
+    fzf
+
+# ---------------------------------------------------------------------------
+# AMD GPU / graphics stack (this machine: Ryzen AI Max "Strix Halo", Radeon 8060S)
+# The amdgpu kernel driver + mesa + RADV (vulkan-radeon) are all that's needed.
+# ---------------------------------------------------------------------------
+print_status "Installing AMD GPU / Vulkan graphics stack..."
+sudo pacman -S --needed --noconfirm \
+    mesa \
+    vulkan-radeon \
+    vulkan-icd-loader \
+    vulkan-tools
+
+# ---------------------------------------------------------------------------
+# Multilib + gaming (32-bit graphics libs for Steam / Proton)
+# ---------------------------------------------------------------------------
+print_status "Enabling multilib repository..."
+if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+    sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+    sudo pacman -Sy
+    print_success "multilib enabled"
+else
+    print_status "multilib already enabled"
+fi
+
+print_status "Installing 32-bit graphics + Steam..."
+sudo pacman -S --needed --noconfirm \
+    lib32-mesa \
+    lib32-vulkan-radeon \
+    steam
+
+# ---------------------------------------------------------------------------
+# Vulkan LLM path (Strix Halo iGPU inference via RADV)
+#   - ollama-vulkan : easy model management; the iGPU must be force-enabled
+#                     (ollama skips integrated GPUs by default)
+#   - llama-cpp-vulkan : direct llama.cpp with the Vulkan backend
+# ---------------------------------------------------------------------------
+print_status "Installing Vulkan LLM runtimes..."
+sudo pacman -S --needed --noconfirm \
+    ollama-vulkan \
+    llama-cpp-vulkan
+
+print_status "Configuring ollama to use the Strix Halo iGPU..."
+sudo mkdir -p /etc/systemd/system/ollama.service.d
+sudo tee /etc/systemd/system/ollama.service.d/override.conf > /dev/null << 'EOF'
+[Service]
+# Strix Halo: the Radeon 8060S is an iGPU, which ollama skips by default.
+Environment="OLLAMA_IGPU_ENABLE=1"
+Environment="OLLAMA_VULKAN=1"
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable --now ollama.service
+print_success "ollama configured for Vulkan iGPU inference"
 
 print_success "All packages installed successfully!"
 print_status "Next step: Run './install-configs.sh' to set up configurations"

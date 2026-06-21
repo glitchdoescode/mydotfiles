@@ -1,6 +1,6 @@
-! HiDPI scaling for 2560x1600 panel (1.5x)
-Xft.dpi:        144
-Xcursor.size:   32
+! HiDPI scaling for 2560x1600 panel (2.0x)
+Xft.dpi:        192
+Xcursor.size:   48
 
 ! Font rendering
 Xft.antialias:  true

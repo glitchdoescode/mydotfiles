@@ -140,7 +140,7 @@ grep -q "GTK_THEME=Materia-dark" ~/.profile 2>/dev/null || echo "export GTK_THEM
 grep -q "QT_QPA_PLATFORMTHEME=qt5ct" ~/.profile 2>/dev/null || echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> ~/.profile
 grep -q "QT_STYLE_OVERRIDE=Fusion" ~/.profile 2>/dev/null || echo "export QT_STYLE_OVERRIDE=Fusion" >> ~/.profile
 grep -q "QT_AUTO_SCREEN_SCALE_FACTOR=1" ~/.profile 2>/dev/null || echo "export QT_AUTO_SCREEN_SCALE_FACTOR=1" >> ~/.profile
-grep -q "XCURSOR_SIZE=32" ~/.profile 2>/dev/null || echo "export XCURSOR_SIZE=32" >> ~/.profile
+grep -q "XCURSOR_SIZE=48" ~/.profile 2>/dev/null || echo "export XCURSOR_SIZE=48" >> ~/.profile
 print_success "Environment variables configured"
 
 # Set up automated lock screen recovery

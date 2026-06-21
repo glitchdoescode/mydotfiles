@@ -108,6 +108,12 @@ sudo mkdir -p /etc/sddm.conf.d/
 sudo cp "$DOTFILES_DIR/config/sddm/theme.conf" /etc/sddm.conf.d/
 print_success "SDDM configuration installed"
 
+# Touchpad: natural scrolling + tap-to-click
+print_status "Installing touchpad configuration..."
+sudo mkdir -p /etc/X11/xorg.conf.d/
+sudo cp "$DOTFILES_DIR/config/x11/30-touchpad.conf" /etc/X11/xorg.conf.d/
+print_success "Touchpad configuration installed"
+
 # Disable any conflicting display manager (this setup uses SDDM)
 if systemctl is-enabled lightdm.service &> /dev/null; then
     print_warning "Disabling conflicting display manager: lightdm"

@@ -202,5 +202,34 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now ollama.service
 print_success "ollama configured for Vulkan iGPU inference"
 
+# ---------------------------------------------------------------------------
+# CachyOS kernel — REQUIRED for internal speaker support on this ASUS TUF A14
+# (FA401EA: AMD ACP7.0 / Realtek RT721 SDCA SoundWire amp). Stock Arch `linux`
+# has no machine driver for it ("No matching ASoC machine driver"); the CachyOS
+# kernel carries the quirk so speakers + mic work.
+# NOTE: cachyos-repo.sh also runs a full `pacman -Syu`, migrating the system to
+# CachyOS-optimized v4 builds. The stock `linux` kernel stays as a GRUB fallback.
+# (Secure Boot is NOT scripted — sbctl keys are machine-specific; set it up by hand.)
+# ---------------------------------------------------------------------------
+print_status "Setting up CachyOS kernel (internal speaker support)..."
+if ! grep -q '^\[cachyos\]' /etc/pacman.conf; then
+    CACHY_TMP="$(mktemp -d)"
+    if curl -fsSL https://mirror.cachyos.org/cachyos-repo.tar.xz | tar xJ -C "$CACHY_TMP"; then
+        ( cd "$CACHY_TMP/cachyos-repo" && yes | sudo ./cachyos-repo.sh --install )
+    else
+        print_warning "Could not fetch CachyOS repo script; set it up manually: https://wiki.cachyos.org/"
+    fi
+    rm -rf "$CACHY_TMP"
+else
+    print_status "CachyOS repo already configured"
+fi
+if pacman -Si linux-cachyos &> /dev/null; then
+    sudo pacman -S --needed --noconfirm linux-cachyos linux-cachyos-headers
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+    print_success "CachyOS kernel installed (boot it from GRUB; stock 'linux' kept as fallback)"
+else
+    print_warning "linux-cachyos unavailable — skipped (needed for internal speakers on this machine)"
+fi
+
 print_success "All packages installed successfully!"
 print_status "Next step: Run './install-configs.sh' to set up configurations"

@@ -16,6 +16,21 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # case-insensitive
 
+# ---- Key bindings (Home/End/Delete/word-nav across terminals) ----
+bindkey -e                            # emacs-style editing (Ctrl-A/E too)
+bindkey "^[[H"    beginning-of-line   # Home
+bindkey "^[OH"    beginning-of-line
+bindkey "^[[1~"   beginning-of-line
+bindkey "^[[F"    end-of-line         # End
+bindkey "^[OF"    end-of-line
+bindkey "^[[4~"   end-of-line
+bindkey "^[[3~"   delete-char         # Delete
+bindkey "^[[1;5C" forward-word        # Ctrl+Right
+bindkey "^[[1;5D" backward-word       # Ctrl+Left
+# terminfo-based (most reliable when the terminal advertises it)
+[[ -n "${terminfo[khome]}" ]] && bindkey "${terminfo[khome]}" beginning-of-line
+[[ -n "${terminfo[kend]}"  ]] && bindkey "${terminfo[kend]}"  end-of-line
+
 # ---- Aliases (ported from bash) ----
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'

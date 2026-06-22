@@ -72,6 +72,11 @@ qt5ct             # Qt5 theme configuration
 kvantum           # Qt theme engine
 xclip             # Clipboard CLI (needed for flameshot image copy on X11)
 
+## Kernel (from CachyOS repo — REQUIRED for internal speakers on the ASUS TUF
+## A14 FA401EA; stock Arch `linux` has no driver for its RT721 SDCA amp)
+linux-cachyos
+linux-cachyos-headers
+
 ## AMD GPU / Vulkan (Ryzen AI Max "Strix Halo", Radeon 8060S)
 mesa
 vulkan-radeon         # RADV open-source Vulkan driver for AMD
